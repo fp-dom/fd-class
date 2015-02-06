@@ -1,15 +1,15 @@
 import { curry2 } from 'fj-curry'
 
 function _addClass(getClass, elements) {
-  return [for (element of elements) element.classList.add(getClass(0))];
+  return elements.map((element, idx) => element.classList.add(getClass(idx)));
 }
 
 function _removeClass(getClass, elements) {
-  return [for (element of elements) element.classList.remove(getClass(0))];
+  return elements.map((element, idx) => element.classList.remove(getClass(idx)));
 }
 
 function _toggleClass(getClass, elements) {
-  return [for (element of elements) element.classList.toggle(getClass(0))];
+  return elements.map((element, idx) => element.classList.toggle(getClass(idx)));
 }
 
 export let addClass = curry2(_addClass);

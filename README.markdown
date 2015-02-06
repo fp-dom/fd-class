@@ -24,4 +24,15 @@ toggleClass(always('blue'), select('li')); // toggles the class "blue" to all th
 var hide = addClass(always('hide'));
 
 hide(select('.item')); // adds the class hide to all ".items"
+
+function rowClass(idx) {
+  return 'row-' + idx;
+}
+
+addClass(rowClass, select('tr'));
+/*
+<tr class="item row-0"></tr>
+<tr class="item row-1"></tr>
+<tr class="item row-2"></tr>
+*/
 ```

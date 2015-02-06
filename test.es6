@@ -72,4 +72,25 @@ describe('fd-class', () => {
     assert(!lis[1].classList.contains('blue'));
     assert(!lis[2].classList.contains('blue'));
   });
+
+  it('#getClass should get the index of the element', () => {
+    function rowClass(idx) {
+      return 'row-' + idx;
+    }
+
+    addClass(rowClass, lis)
+    assert(lis[0].classList.contains('row-0'));
+    assert(lis[1].classList.contains('row-1'));
+    assert(lis[2].classList.contains('row-2'));
+
+    removeClass(rowClass, lis)
+    assert(!lis[0].classList.contains('row-0'));
+    assert(!lis[1].classList.contains('row-1'));
+    assert(!lis[2].classList.contains('row-2'));
+
+    toggleClass(rowClass, lis)
+    assert(lis[0].classList.contains('row-0'));
+    assert(lis[1].classList.contains('row-1'));
+    assert(lis[2].classList.contains('row-2'));
+  });
 });
