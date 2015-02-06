@@ -15,11 +15,12 @@ var _ = require("./");
 var addClass = _.addClass;
 var removeClass = _.removeClass;
 var toggleClass = _.toggleClass;
+var hasClass = _.hasClass;
 
 
 
 describe("fd-class", function () {
-  var HTML = "\n    <ul data-foo=\"bar\" class=\"fruits\">\n    <li class=\"fruit yummie tastie\">apple</li>\n    <li class=\"fruit yummie tastie\">orange</li>\n    <li class=\"fruit yummie tastie\">plum</li>\n    </ul>\n  ";
+  var HTML = "\n    <ul data-foo=\"bar\" class=\"fruits\">\n    <li class=\"fruit yummie tastie red\">apple</li>\n    <li class=\"fruit yummie tastie red\">orange</li>\n    <li class=\"fruit yummie tastie\">plum</li>\n    </ul>\n  ";
   var fixture = undefined,
       lis = undefined,
       li = undefined;
@@ -80,6 +81,11 @@ describe("fd-class", function () {
     assert(!lis[0].classList.contains("blue"));
     assert(!lis[1].classList.contains("blue"));
     assert(!lis[2].classList.contains("blue"));
+  });
+
+  it("#hasClass", function () {
+    assert(hasClass(always("fruit"))(lis));
+    assert(!hasClass(always("red"))(lis));
   });
 
   it("#getClass should get the index of the element", function () {

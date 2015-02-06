@@ -2,14 +2,14 @@ import assert from 'assert';
 import always from 'fj-always';
 import { select, selectOne } from 'fd-select';
 
-import { addClass, removeClass, toggleClass } from './';
+import { addClass, removeClass, toggleClass, hasClass } from './';
 
 
 describe('fd-class', () => {
   const HTML =  `
     <ul data-foo="bar" class="fruits">
-    <li class="fruit yummie tastie">apple</li>
-    <li class="fruit yummie tastie">orange</li>
+    <li class="fruit yummie tastie red">apple</li>
+    <li class="fruit yummie tastie red">orange</li>
     <li class="fruit yummie tastie">plum</li>
     </ul>
   `;
@@ -71,6 +71,11 @@ describe('fd-class', () => {
     assert(!lis[0].classList.contains('blue'));
     assert(!lis[1].classList.contains('blue'));
     assert(!lis[2].classList.contains('blue'));
+  });
+
+  it('#hasClass', () => {
+    assert(hasClass(always('fruit'))(lis));
+    assert(!hasClass(always('red'))(lis));
   });
 
   it('#getClass should get the index of the element', () => {
