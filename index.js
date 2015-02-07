@@ -1,34 +1,29 @@
 "use strict";
 
-var curry2 = require("fj-curry").curry2;
+var _fjCurry = require("fj-curry");
+
+var curry2 = _fjCurry.curry2;
+var curry3 = _fjCurry.curry3;
 
 
-function _addClass(getClass, elements) {
+
+var _modifyClassList = function (modify, getClass, elements) {
   return elements.map(function (element, idx) {
-    return element.classList.add(getClass(idx));
+    return modify.call(element.classList, getClass(idx));
   });
-}
+};
 
-function _removeClass(getClass, elements) {
-  return elements.map(function (element, idx) {
-    return element.classList.remove(getClass(idx));
-  });
-}
-
-function _toggleClass(getClass, elements) {
-  return elements.map(function (element, idx) {
-    return element.classList.toggle(getClass(idx));
-  });
-}
-
-function _hasClass(getClass, elements) {
+var _hasClass = function (getClass, elements) {
   return elements.every(function (element, idx) {
     return element.classList.contains(getClass(idx));
   });
-}
+};
 
-var addClass = exports.addClass = curry2(_addClass);
-var removeClass = exports.removeClass = curry2(_removeClass);
-var toggleClass = exports.toggleClass = curry2(_toggleClass);
+var ClassList = DOMTokenList.prototype;
+var modifyClassList = curry3(_modifyClassList);
+
+var addClass = exports.addClass = modifyClassList(ClassList.add);
+var removeClass = exports.removeClass = modifyClassList(ClassList.remove);
+var toggleClass = exports.toggleClass = modifyClassList(ClassList.toggle);
 var hasClass = exports.hasClass = curry2(_hasClass);
 exports.__esModule = true;
